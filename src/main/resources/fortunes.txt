@@ -1,0 +1,5 @@
+Fortune from file one
+Fortune from file two
+Fortune from file three
+Fortune from file four
+Fortune from file five
