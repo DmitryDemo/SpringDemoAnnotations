@@ -9,18 +9,13 @@ public class HockeyCoach implements Coach {
 
     @Autowired
     @Qualifier("fileReaderFortuneService")
-    private FortuneService fs;
+    private FortuneService fortuneService;
 
-    public HockeyCoach() {
-    }
-
-    @Override
     public String getDailyWorkout() {
         return "Do some hockey today!";
     }
 
-    @Override
     public String getDailyFortune() {
-        return fs.getFortune();
+        return "= = = HockeyCoach: " + fortuneService.getFortune();
     }
 }

@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 @Component
 public class TennisCoach implements Coach {
 
@@ -22,7 +25,6 @@ public class TennisCoach implements Coach {
         System.out.println("> > > Inside default TennisCoach constructor.");
     }
 
-    @Override
     public String getDailyWorkout() {
         return "Do some Tennis practice today!";
     }
@@ -31,9 +33,20 @@ public class TennisCoach implements Coach {
         return String.format("Coach's phone is %s and email '%s'", coachPhoneNumber, coachEmail);
     }
 
-    @Override
     public String getDailyFortune() {
         return fortuneService.getFortune();
+    }
+
+    // Init method
+    @PostConstruct
+    public void doMyStartupStuff() {
+        System.out.println(">> TennisCoach: Inside doMyStartupStuff().");
+    }
+
+    // Destroy method
+    @PreDestroy
+    public void doMyCleanupStuff() {
+        System.out.println(">> TennisCoach: Inside doMyCleanupStuff().");
     }
 
 //    @Autowired

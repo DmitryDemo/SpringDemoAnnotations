@@ -1,12 +1,13 @@
 package com.spring.annotations;
 
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class AnnotationDemoApp {
 
     public static void main(String[] args) {
 
-        ClassPathXmlApplicationContext context =
+        ConfigurableApplicationContext context =
                 new ClassPathXmlApplicationContext("applicationContext.xml");
 
         Coach theCoach = context.getBean("tennisCoach", Coach.class);

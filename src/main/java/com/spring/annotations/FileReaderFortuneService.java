@@ -2,9 +2,9 @@ package com.spring.annotations;
 
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -14,15 +14,18 @@ import java.util.Random;
 public class FileReaderFortuneService implements FortuneService {
 
     private static final String FILE_WITH_FORTUENS = "fortunes.txt";
+    private List<String> rows;
 
     Random rnd = new Random();
 
-    @Override
     public String getFortune() {
+        return rows.get(rnd.nextInt(rows.size()));
+    }
 
-        List<String> allFortunes = getFortunesFromFile(FILE_WITH_FORTUENS);
-
-        return allFortunes.get(rnd.nextInt(allFortunes.size()));
+    @PostConstruct
+    private void readRows() {
+        rows = getFortunesFromFile(FILE_WITH_FORTUENS);
+        rows.forEach(fortune -> System.out.println("Next row in file is: " + fortune));
     }
 
     private List<String> getFortunesFromFile(final String fileName) {
